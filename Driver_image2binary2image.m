@@ -14,5 +14,5 @@ image_rebuilt = ...
 
 figure;
 imshow(imresize(image_rebuilt,resize_scale));
-% imshow(image_rebuilt);
+
 toc
