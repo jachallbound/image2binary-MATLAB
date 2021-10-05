@@ -1,6 +1,6 @@
 % clear; close all;
 
-function [image_resized, image_bits, image_original_dimensions] = image2binary(image_filename, resize_scale, bit_depth)
+function [image_bits, image_original_dimensions] = image2binary(image_filename, resize_scale, bit_depth)
 %% Convert image to grayscale vector then to bit array
 % File to load in
 % original_image_filename = "sherlock.jpg";
@@ -22,11 +22,20 @@ image_1d = reshape(image_resized,1,[]);
 %
 % Replace 8 with bit_depth once I understand how to pad back to 8 in
 % binary2image
-image_bits = zeros(1,length(image_1d)*8); % Pre-allocate space
+% image_bits_full = zeros(1,length(image_1d)*8); % Pre-allocate space
+% ii = 1;
+% for i = 1:length(image_1d)
+%     image_bits_full(ii:ii+7) = bitget(image_1d(i),8:-1:1);
+%     ii = ii + 8;
+% end
+
+stride = bit_depth;
+MSB = 8 - bit_depth + 1;
+image_bits = zeros(1,length(image_1d)*bit_depth); % Pre-allocate space
 ii = 1;
 for i = 1:length(image_1d)
-    image_bits(ii:ii+7) = bitget(image_1d(i),8:-1:1);
-    ii = ii + 8;
+    image_bits(ii:ii+(stride-1)) = bitget(image_1d(i),8:-1:MSB);
+    ii = ii + stride;
 end
 
 end
