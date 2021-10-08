@@ -1,4 +1,11 @@
-function image_reshaped = binary2image(image_bits, bit_depth, pad_flag, image_original_dimensions)
+function image_reshaped = binary2image(image_bits, image_original_dimensions, bit_depth, pad_flag)
+arguments
+    image_bits
+    image_original_dimensions
+    bit_depth = 8
+    pad_flag = "one"
+end
+
 %% Convert bit vector to uints
 % convert int to string, string to char, then remove extra dimension
 image_bits_char = squeeze(char(string(image_bits)));
