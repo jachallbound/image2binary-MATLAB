@@ -1,9 +1,21 @@
-function [image_bits, image_original_dimensions] = image2binary(image_filename, resize_scale, bit_depth)
+function [image_bits, image_original_dimensions] = image2binary(image, resize_scale, bit_depth, NameValueArgs)
+arguments
+    image
+    resize_scale = 1
+    bit_depth = 8
+    NameValueArgs.Image = true
+end
+
 %% Convert image to grayscale 1D vector
-image_gray = rgb2gray(imread(image_filename));
-image_resized = imresize(image_gray, 1/resize_scale);
-image_original_dimensions = size(image_resized);
-image_1d = reshape(image_resized,1,[]);
+if NameValueArgs.Image
+    image = rgb2gray(imread(image));
+    image = imresize(image, 1/resize_scale);
+else
+    image = uint8(char(image));
+    bit_depth = 8;
+end
+image_original_dimensions = size(image);
+image_1d = reshape(image,1,[]);
 
 %% Convert 1D vector of uint8s into bit_depth*pixels long vector of bits
 stride = bit_depth;
