@@ -18,7 +18,7 @@ imshow(imresize(image_rebuilt,resize_scale));
 toc
 
 
-%% Also works for converting an byte to binary array
+%% Also works for converting a byte to binary array
 % just set NameValueArg "Image" to false
 message = "Hello";
 [byte_bits, byte_array_length] = ...
