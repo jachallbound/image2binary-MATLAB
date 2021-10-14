@@ -10,4 +10,5 @@ Just pass the NameValueArg `"Image", false` to `image2binary` function.
 Example in `Driver_image2binary2image.m`.
 
 ## Requirements
-This probably requires MATLAB's Image Processing Toolbox.
++ R2019b+ (from use of arguments keyword)
++ This probably requires MATLAB's Image Processing Toolbox.
